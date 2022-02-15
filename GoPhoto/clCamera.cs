@@ -4,9 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,7 +17,7 @@ namespace GoPhoto
         public PictureBox pBox;
         public List<Bitmap> images;
 
-        public clCamera(PictureBox _pictureBox)
+        public clCamera(ref PictureBox _pictureBox)
         {
             RefreshCameras();
             pBox = _pictureBox;
@@ -51,7 +48,22 @@ namespace GoPhoto
         //c# webcam capture picture
         private void FinalFrame_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            pBox.Image = (Bitmap)eventArgs.Frame.Clone();
+            try
+            {
+                Bitmap oldBitmap = (Bitmap)pBox.BackgroundImage;
+                pBox.BackgroundImage = (Bitmap)eventArgs.Frame.Clone();
+                if (oldBitmap != null)
+                {
+                    oldBitmap.Dispose();
+                }
+
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            
         }
 
         public void Close()
@@ -95,7 +107,7 @@ namespace GoPhoto
 
         public Bitmap TakePhoto()
         {
-            using(Bitmap image = new Bitmap(pBox.Image))
+            using(Bitmap image = (Bitmap)pBox.BackgroundImage)
             {
                 Bitmap img = new Bitmap(image);
                 return img;
@@ -128,7 +140,8 @@ namespace GoPhoto
                 graphics.DrawImage(secondImage, new Rectangle(new Point(0, firstImage.Height + 1), secondImage.Size),
                     new Rectangle(new Point(), secondImage.Size), GraphicsUnit.Pixel);
             }
-
+            firstImage.Dispose();
+            secondImage.Dispose();
             return outputImage;
         }
     }

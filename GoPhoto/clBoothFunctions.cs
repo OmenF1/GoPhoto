@@ -16,10 +16,10 @@ namespace GoPhoto
         private int duration = 5;
         private int loopCount = 0;
 
-        public clBoothFunctions(System.Windows.Forms.PictureBox _pBox, System.Windows.Forms.Label _cLabel)
+        public clBoothFunctions(ref System.Windows.Forms.PictureBox _pBox , ref System.Windows.Forms.Label _cLabel)
         {
             cLabel = _cLabel;
-            camera = new clCamera(_pBox);
+            camera = new clCamera(ref _pBox);
         }
 
 
@@ -43,7 +43,9 @@ namespace GoPhoto
                 {
                     loopCount = 0;
                     Bitmap imageFinal = new Bitmap(camera.MergeTwoImages(camera.images[0], camera.images[1]));
-                    imageFinal.Save(@"C:\Users\Owen\Desktop\test.jpg", ImageFormat.Jpeg);
+                    imageFinal.Save(@"C:\Temp\test.jpg", ImageFormat.Jpeg);
+                    camera.images = null;
+                    imageFinal.Dispose();
                     cLabel.Text = "Countdown";
                 }
 

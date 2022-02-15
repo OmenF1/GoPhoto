@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GoPhoto
@@ -23,7 +15,7 @@ namespace GoPhoto
         private void Form1_Load(object sender, EventArgs e)
         {
             
-            booth = new clBoothFunctions(pbCameraView, lbCountdown);
+            booth = new clBoothFunctions(ref pbCameraView, ref lbCountdown);
             pbCameraView.SizeMode = PictureBoxSizeMode.StretchImage;
             cbCameraSelect.DataSource = booth.camera.inputDevices;
             cbCameraSelect.SelectedIndex = -1;
