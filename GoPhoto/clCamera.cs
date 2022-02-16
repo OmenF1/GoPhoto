@@ -72,42 +72,10 @@ namespace GoPhoto
                 videoCaptureDevice.Stop();
         }
 
-        public async void  save_Click()
-        {
-            if (pBox.Image != null)
-            {
-                Bitmap imageOne;
-                Bitmap imageTwo;
-                Bitmap imageFinal;
-                //Save First
-                Bitmap varBmp = new Bitmap(pBox.Image);
-                imageOne = new Bitmap(varBmp);
-                await Task.Delay(3600);
-                varBmp = new Bitmap(pBox.Image);
-                imageTwo = new Bitmap(varBmp);
-                imageFinal = new Bitmap(MergeTwoImages(imageOne, imageTwo));
-                imageFinal.Save(@"C:\Users\Owen\Desktop\test.jpg", ImageFormat.Jpeg);
-
-
-
-
-                //newBitmap
-                ////Now Dispose to free the memory
-                imageOne.Dispose();
-                imageOne = null;
-                imageTwo.Dispose();
-                imageTwo = null;
-                imageFinal.Dispose();
-                imageFinal = null;
-                Console.WriteLine("Saved!");
-            }
-            else
-            { MessageBox.Show("null exception"); }
-        }
 
         public Bitmap TakePhoto()
         {
-            using(Bitmap image = (Bitmap)pBox.BackgroundImage)
+            using (Bitmap image = (Bitmap)pBox.BackgroundImage)
             {
                 Bitmap img = new Bitmap(image);
                 return img;
@@ -115,34 +83,21 @@ namespace GoPhoto
 
         }
 
-        public Bitmap MergeTwoImages(Image firstImage, Image secondImage)
+
+        public Bitmap GeneratePostCard(Image image1, Image image2, Image image3, Image image4)
         {
-            if (firstImage == null)
+            Bitmap bmp = new Bitmap(1800, 1200, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            using (Graphics g = Graphics.FromImage(bmp))
             {
-                throw new ArgumentNullException("firstImage");
+                g.DrawImage(image1, 72, 75, 800, 500);
+                g.DrawImage(image2, 926, 75, 800, 500);
+                g.DrawImage(image3, 72, 625, 800, 500);
+                g.DrawImage(image4, 926, 625, 800, 500);
             }
+            return bmp;
 
-            if (secondImage == null)
-            {
-                throw new ArgumentNullException("secondImage");
-            }
-
-            int outputImageWidth = firstImage.Width > secondImage.Width ? firstImage.Width : secondImage.Width;
-
-            int outputImageHeight = firstImage.Height + secondImage.Height + 1;
-
-            Bitmap outputImage = new Bitmap(outputImageWidth, outputImageHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-            using (Graphics graphics = Graphics.FromImage(outputImage))
-            {
-                graphics.DrawImage(firstImage, new Rectangle(new Point(), firstImage.Size),
-                    new Rectangle(new Point(), firstImage.Size), GraphicsUnit.Pixel);
-                graphics.DrawImage(secondImage, new Rectangle(new Point(0, firstImage.Height + 1), secondImage.Size),
-                    new Rectangle(new Point(), secondImage.Size), GraphicsUnit.Pixel);
-            }
-            firstImage.Dispose();
-            secondImage.Dispose();
-            return outputImage;
         }
+
     }
 }

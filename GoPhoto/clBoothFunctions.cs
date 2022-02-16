@@ -33,7 +33,7 @@ namespace GoPhoto
                 Task.Delay(2000);
                 duration = 5;
                 camera.images.Add(camera.TakePhoto());
-                if (loopCount < 1)
+                if (loopCount < 3)
                 {
                     loopCount++;
 
@@ -42,7 +42,7 @@ namespace GoPhoto
                 else
                 {
                     loopCount = 0;
-                    Bitmap imageFinal = new Bitmap(camera.MergeTwoImages(camera.images[0], camera.images[1]));
+                    Bitmap imageFinal = new Bitmap(camera.GeneratePostCard(camera.images[0], camera.images[1], camera.images[2], camera.images[3]));
                     imageFinal.Save(@"C:\Temp\test.jpg", ImageFormat.Jpeg);
                     camera.images = null;
                     imageFinal.Dispose();
