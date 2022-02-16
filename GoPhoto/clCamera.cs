@@ -75,11 +75,12 @@ namespace GoPhoto
 
         public Bitmap TakePhoto()
         {
-            using (Bitmap image = (Bitmap)pBox.BackgroundImage)
-            {
-                Bitmap img = new Bitmap(image);
-                return img;
-            }
+            //using (Bitmap image = (Bitmap)pBox.BackgroundImage)
+            //{
+            //    Bitmap img = new Bitmap(image);
+            //    return img;
+            //}
+            return new Bitmap((Bitmap)pBox.BackgroundImage);
 
         }
 
@@ -95,6 +96,10 @@ namespace GoPhoto
                 g.DrawImage(image3, 72, 625, 800, 500);
                 g.DrawImage(image4, 926, 625, 800, 500);
             }
+            image1.Dispose();
+            image2.Dispose();
+            image3.Dispose();
+            image4.Dispose();
             return bmp;
 
         }

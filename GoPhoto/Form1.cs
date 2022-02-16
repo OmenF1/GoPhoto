@@ -16,6 +16,7 @@ namespace GoPhoto
         {
             
             booth = new clBoothFunctions(ref pbCameraView, ref lbCountdown);
+            pbCameraView.BackgroundImageLayout = ImageLayout.Stretch;
             pbCameraView.SizeMode = PictureBoxSizeMode.StretchImage;
             cbCameraSelect.DataSource = booth.camera.inputDevices;
             cbCameraSelect.SelectedIndex = -1;

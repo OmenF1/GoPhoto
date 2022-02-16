@@ -37,8 +37,8 @@ namespace GoPhoto
             this.btFullScreen = new System.Windows.Forms.Button();
             this.lbCountdown = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbCameraView)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -79,6 +79,7 @@ namespace GoPhoto
             this.pbCameraView.Location = new System.Drawing.Point(93, 52);
             this.pbCameraView.Name = "pbCameraView";
             this.pbCameraView.Size = new System.Drawing.Size(1159, 617);
+            this.pbCameraView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbCameraView.TabIndex = 3;
             this.pbCameraView.TabStop = false;
             // 
@@ -131,6 +132,14 @@ namespace GoPhoto
             this.groupBox1.Text = "Get Image";
             this.groupBox1.Visible = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(57, 19);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(111, 101);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -139,14 +148,6 @@ namespace GoPhoto
             this.label1.Size = new System.Drawing.Size(208, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "http://photobooth.co.za/12312/12312.jpg";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(57, 19);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(111, 101);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 

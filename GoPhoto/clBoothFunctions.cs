@@ -42,10 +42,15 @@ namespace GoPhoto
                 else
                 {
                     loopCount = 0;
-                    Bitmap imageFinal = new Bitmap(camera.GeneratePostCard(camera.images[0], camera.images[1], camera.images[2], camera.images[3]));
-                    imageFinal.Save(@"C:\Temp\test.jpg", ImageFormat.Jpeg);
-                    camera.images = null;
-                    imageFinal.Dispose();
+                    using (Bitmap imageFinal = new Bitmap(camera.GeneratePostCard(camera.images[0], camera.images[1], camera.images[2], camera.images[3])))
+                    {
+                        imageFinal.Save(@"C:\Temp\test.jpg", ImageFormat.Jpeg);
+                    }
+                    foreach (Bitmap item in camera.images)
+                    {
+                        item.Dispose();
+                    }
+                    camera.images.Clear();
                     cLabel.Text = "Countdown";
                 }
 
@@ -59,7 +64,7 @@ namespace GoPhoto
 
         public void NewBoothPhoto()
         {
-            //camera.save_Click();
+            
             camera.images = new List<Bitmap>();
             timer1 = new System.Windows.Forms.Timer();
             timer1.Tick += new EventHandler(count_down);
